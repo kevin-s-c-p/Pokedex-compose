@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Pokemon Prueba</string>
+    <string name="title_activity_splash">SplashActivity</string>
+
+    <string name="content_general_image">image</string>
+    <string name="title_home">Inicio</string>
+    <string name="title_pokemon_favorites">Pokemones Favoritos</string>
+    <string name="title_profile">Perfil</string>
+</resources>
