@@ -8,5 +8,7 @@ data class PokemonResponse(
     @SerializedName("name")
     val name: String,
     @SerializedName("sprites")
-    val images: SpritesResponse
+    val images: SpritesResponse,
+    @SerializedName("abilities")
+    val abilities: List<AbilitiesResponse>
 )

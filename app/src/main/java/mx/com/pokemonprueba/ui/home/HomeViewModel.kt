@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import mx.com.pokemonprueba.data.items.PokemonAbility
 import mx.com.pokemonprueba.data.items.PokemonItem
 import mx.com.pokemonprueba.data.response.PokemonResponse
 import mx.com.pokemonprueba.data.response.PokemonsResponse
@@ -80,7 +81,8 @@ class HomeViewModel @Inject constructor(
                                        id = pokemon.id.toString(),
                                        name = pokemon.name,
                                        image = pokemon.images.imageFront,
-                                       imageBack = pokemon.images.imageBack
+                                       imageBack = pokemon.images.imageBack,
+                                       abilities = pokemon.abilities.map { ability -> PokemonAbility(ability.ability.name) }
                                    )
 
                                    pokemons.add(pokemonItem)
