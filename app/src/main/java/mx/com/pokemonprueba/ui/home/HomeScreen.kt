@@ -35,6 +35,7 @@ import mx.com.pokemonprueba.ui.composables.BottomModalInformationPokemon
 import mx.com.pokemonprueba.ui.composables.CustomImage
 import mx.com.pokemonprueba.ui.composables.CustomScaffold
 import mx.com.pokemonprueba.ui.composables.Loading
+import mx.com.pokemonprueba.ui.composables.PokemonCard
 import mx.com.pokemonprueba.ui.home.view.event.HomeViewEvent
 import mx.com.pokemonprueba.ui.home.view.state.HomeViewState
 
@@ -72,43 +73,6 @@ fun HomeScreen(
                     events(HomeViewEvent.ShowBottomModal)
                 }
             }
-        }
-    }
-}
-
-@Composable
-private fun PokemonCard(pokemon: PokemonItem, pokemonSelected: () -> Unit) {
-    Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .clickable { pokemonSelected() },
-        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer)
-    ) {
-        Row(
-            modifier = Modifier
-                .fillMaxSize()
-                .wrapContentHeight()
-                .heightIn(max = 300.dp)
-                .padding(10.dp),
-            horizontalArrangement = Arrangement.spacedBy(10.dp),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            CustomImage(
-                image = pokemon.image,
-                contentScale = ContentScale.Inside,
-                modifier = Modifier
-                    .fillMaxWidth(.14f)
-                    .fillMaxHeight(.17f)
-                    .background(MaterialTheme.colorScheme.primary, shape = CircleShape)
-                    .clip(CircleShape)
-            )
-
-            Text(
-                text = pokemon.name,
-                style = MaterialTheme.typography.titleMedium,
-                color = MaterialTheme.colorScheme.primary,
-                modifier = Modifier.weight(1f)
-            )
         }
     }
 }

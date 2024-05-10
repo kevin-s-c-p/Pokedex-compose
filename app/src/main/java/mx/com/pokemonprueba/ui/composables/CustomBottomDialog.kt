@@ -29,9 +29,11 @@ import mx.com.pokemonprueba.ui.theme.ColorSuccess
 @Composable
 fun BottomModalInformationPokemon(
     isVisible: Boolean,
+
     pokemonItem: PokemonItem?,
     closeModal: () -> Unit,
-    savePokemon: () -> Unit
+    savePokemon: () -> Unit = {},
+    showOptionsButtons: Boolean = true
 ) {
     CustomBottomDialog(isVisible = isVisible, closeModal = closeModal) {
         Column(
@@ -83,12 +85,14 @@ fun BottomModalInformationPokemon(
 
             Spacer(modifier = Modifier.height(15.dp))
 
-            CustomsDoubleButtons(
-                textPrimaryButton = "Cancelar",
-                textSecondaryButton = "Guardar",
-                clickPrimaryButton = { closeModal() },
-                clickSecondaryButton = { savePokemon() }
-            )
+            if (showOptionsButtons) {
+                CustomsDoubleButtons(
+                    textPrimaryButton = "Cancelar",
+                    textSecondaryButton = "Guardar",
+                    clickPrimaryButton = { closeModal() },
+                    clickSecondaryButton = { savePokemon() }
+                )
+            }
         }
     }
 }

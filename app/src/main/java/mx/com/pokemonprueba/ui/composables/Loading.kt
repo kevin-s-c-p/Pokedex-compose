@@ -1,12 +1,15 @@
 package mx.com.pokemonprueba.ui.composables
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.window.Dialog
+import androidx.compose.ui.window.DialogProperties
 import com.airbnb.lottie.compose.LottieAnimation
 import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.LottieConstants
@@ -26,10 +29,10 @@ fun Loading(isLoading: Boolean) {
 
     if (isLoading) {
         Dialog(
-            onDismissRequest = { /*TODO*/ }
+            onDismissRequest = {  }
         ) {
             Box(
-                Modifier.fillMaxSize(),
+                Modifier.fillMaxSize().background(color = Color.Transparent),
                 contentAlignment = Alignment.Center
             ) {
                 LottieAnimation(

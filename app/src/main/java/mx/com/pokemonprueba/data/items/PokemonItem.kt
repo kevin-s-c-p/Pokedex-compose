@@ -5,7 +5,7 @@ import mx.com.pokemonprueba.data.entities.PokemonEntity
 data class PokemonItem(
     val id: String,
     val image: String,
-    val imageBack: String,
+    val imageBack: String = "",
     val name: String,
     val abilities: List<PokemonAbility> = emptyList()
 ) {
