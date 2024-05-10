@@ -6,4 +6,5 @@ sealed class HomeViewEvent {
     data object ShowBottomModal: HomeViewEvent()
     data object HideBottomModal: HomeViewEvent()
     data class PokemonSelected(val pokemon: PokemonItem): HomeViewEvent()
+    data object SavePokemon: HomeViewEvent()
 }

@@ -51,7 +51,10 @@ fun HomeScreen(
         state.showModalInformation,
         state.pokemonItemSelected,
         closeModal = { events(HomeViewEvent.HideBottomModal) },
-        savePokemon = {  }
+        savePokemon = {
+            events(HomeViewEvent.HideBottomModal)
+            events(HomeViewEvent.SavePokemon)
+        }
     )
 
     CustomScaffold(
@@ -67,7 +70,6 @@ fun HomeScreen(
                 PokemonCard(pokemon) {
                     events(HomeViewEvent.PokemonSelected(pokemon))
                     events(HomeViewEvent.ShowBottomModal)
-
                 }
             }
         }

@@ -13,6 +13,7 @@ import mx.com.pokemonprueba.data.response.PokemonsResponse
 import mx.com.pokemonprueba.data.view_model.BaseViewModel
 import mx.com.pokemonprueba.domain.use_case.GetPokemonUseCase
 import mx.com.pokemonprueba.domain.use_case.GetPokemonsUseCase
+import mx.com.pokemonprueba.domain.use_case.SavePokemonUseCase
 import mx.com.pokemonprueba.ui.home.view.event.HomeViewEvent
 import mx.com.pokemonprueba.ui.home.view.state.HomeViewState
 import mx.com.pokemonprueba.utils.NetworkResult
@@ -22,7 +23,8 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(
     private val context: Context,
     private val getPokemonsUseCase: GetPokemonsUseCase,
-    private val getPokemonUseCase: GetPokemonUseCase
+    private val getPokemonUseCase: GetPokemonUseCase,
+    private val savePokemonUseCase: SavePokemonUseCase
 ): BaseViewModel() {
     init {
         initViewState(HomeViewState())
@@ -48,6 +50,7 @@ class HomeViewModel @Inject constructor(
             HomeViewEvent.HideBottomModal -> showModal(false)
             HomeViewEvent.ShowBottomModal -> showModal(true)
             is HomeViewEvent.PokemonSelected -> updatePokemon(event.pokemon)
+            HomeViewEvent.SavePokemon -> savePokemon()
         }
     }
 
@@ -101,5 +104,18 @@ class HomeViewModel @Inject constructor(
         val state: HomeViewState = currentViewState()
 
         updateViewState(state.copy(pokemons = pokemons))
+    }
+
+    private fun savePokemon() {
+        val state: HomeViewState = currentViewState()
+        isLoading(true)
+        viewModelScope.launch {
+            state.pokemonItemSelected?.let {
+                val saveSuccess = savePokemonUseCase.invoke(it)
+                val messageForToast = if (saveSuccess) "Guardado con exito" else "Hubo un error intente mas tarde"
+                showToast(messageForToast, context)
+            }
+            isLoading(false)
+        }
     }
 }

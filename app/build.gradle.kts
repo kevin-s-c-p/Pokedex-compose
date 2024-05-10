@@ -95,4 +95,10 @@ dependencies {
     implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
 
     implementation("com.airbnb.android:lottie-compose:6.0.0")
+
+    implementation("androidx.room:room-ktx:2.5.0")
+    testImplementation("androidx.room:room-testing:2.5.0")
+    kapt("androidx.room:room-compiler:2.5.0")
+    implementation("androidx.room:room-runtime:2.4.0")
+    annotationProcessor("androidx.room:room-compiler:2.4.0")
 }
