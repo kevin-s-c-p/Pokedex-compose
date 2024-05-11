@@ -18,4 +18,10 @@ interface PokemonDao {
 
     @Delete
     suspend fun deletePokemon(pokemonEntity: PokemonEntity)
+
+    @Query("DELETE FROM pokemon")
+    suspend fun deleteAllPokemon()
+
+    @Query("SELECT COUNT(*) FROM pokemon")
+    suspend fun findNumOfPokemon(): Int
 }

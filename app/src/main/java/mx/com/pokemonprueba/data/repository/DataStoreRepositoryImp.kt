@@ -6,7 +6,9 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.preferencesDataStore
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.flow
 import mx.com.pokemonprueba.domain.repository.DataStoreRepository
 import mx.com.pokemonprueba.utils.DataStoreConstant.DARK_THEME
 import mx.com.pokemonprueba.utils.DataStoreConstant.NAME_DATA_STORE
@@ -23,8 +25,12 @@ class DataStoreRepositoryImp @Inject constructor(
         setValueWithKeyAndValue(preference, value)
     }
 
-    override suspend fun getIfIsTheDarkTheme(): Boolean {
-        return getValueWithKey(booleanPreferencesKey(DARK_THEME)) ?: false
+    override fun getIfIsTheDarkTheme(): Flow<Boolean> {
+        return flow {
+            emit(
+                getValueWithKey(booleanPreferencesKey(DARK_THEME)) ?: false
+            )
+        }
     }
 
     override suspend fun <T> getValueWithKey(preferenceKey: Preferences.Key<T>): T? {

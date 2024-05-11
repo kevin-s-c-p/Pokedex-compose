@@ -15,6 +15,9 @@ import mx.com.pokemonprueba.ui.home.view.state.HomeViewState
 import mx.com.pokemonprueba.ui.pokemon.PokemonFavorites
 import mx.com.pokemonprueba.ui.pokemon.PokemonFavoritesViewModel
 import mx.com.pokemonprueba.ui.pokemon.view.state.PokemonFavoriteViewState
+import mx.com.pokemonprueba.ui.profile.ProfileScreen
+import mx.com.pokemonprueba.ui.profile.ProfileViewModel
+import mx.com.pokemonprueba.ui.profile.view.state.ProfileViewState
 
 @Composable
 fun Navigation(navController: NavController) {
@@ -63,7 +66,23 @@ fun Navigation(navController: NavController) {
         }
 
         composable(Screens.PROFILE) {
+            val viewModel = hiltViewModel<ProfileViewModel>()
+            val state by viewModel.getState<ProfileViewState>().collectAsState()
 
+            ProfileScreen(
+                state = state,
+                onEvent = viewModel::onEvent,
+                navigateTo = {
+                    navController.navigate(it) {
+                        popUpTo(Screens.PROFILE) {
+                            saveState = false
+                            inclusive = true
+                        }
+                        launchSingleTop = true
+                        restoreState = false
+                    }
+                }
+            )
         }
     }
 }
