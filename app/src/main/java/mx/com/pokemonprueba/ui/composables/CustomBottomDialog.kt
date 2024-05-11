@@ -89,38 +89,13 @@ fun BottomModalInformationPokemon(
                 CustomsDoubleButtons(
                     textPrimaryButton = "Cancelar",
                     textSecondaryButton = "Guardar",
+                    colorSecondaryButton = ColorSuccess,
+                    colorTextPrimaryButton = MaterialTheme.colorScheme.onPrimary,
+                    colorTextSecondaryButton = MaterialTheme.colorScheme.onPrimary,
                     clickPrimaryButton = { closeModal() },
                     clickSecondaryButton = { savePokemon() }
                 )
             }
-        }
-    }
-}
-
-@Composable
-private fun CustomsDoubleButtons(
-    textPrimaryButton: String,
-    textSecondaryButton: String,
-    clickPrimaryButton: () -> Unit,
-    clickSecondaryButton: () -> Unit
-) {
-    Row(
-        Modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.spacedBy(10.dp)
-    ) {
-        CustomButton(
-            modifier = Modifier.weight(1f),
-            textButton = textPrimaryButton
-        ) {
-            clickPrimaryButton()
-        }
-
-        CustomButton(
-            modifier = Modifier.weight(1f),
-            textButton = textSecondaryButton,
-            buttonColor = ColorSuccess
-        ) {
-            clickSecondaryButton()
         }
     }
 }

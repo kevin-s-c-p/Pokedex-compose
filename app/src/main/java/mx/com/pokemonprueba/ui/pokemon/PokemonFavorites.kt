@@ -12,6 +12,7 @@ import androidx.navigation.NavController
 import mx.com.pokemonprueba.R
 import mx.com.pokemonprueba.ui.composables.BottomModalInformationPokemon
 import mx.com.pokemonprueba.ui.composables.CustomScaffold
+import mx.com.pokemonprueba.ui.composables.ModalDeletePokemon
 import mx.com.pokemonprueba.ui.composables.PokemonCard
 import mx.com.pokemonprueba.ui.pokemon.view.event.PokemonFavoriteViewEvent
 import mx.com.pokemonprueba.ui.pokemon.view.state.PokemonFavoriteViewState
@@ -28,6 +29,18 @@ fun PokemonFavorites(
         pokemonItem = state.pokemonInformationToShow,
         closeModal = { onEvents(PokemonFavoriteViewEvent.HideModalDeletePokemon) },
         showOptionsButtons = false
+    )
+
+    ModalDeletePokemon(
+        isVisible = state.isVisibleModalDeletePokemon,
+        imagePokemon = state.pokemonInformationToShow?.image ?: "",
+        cancel = { onEvents(PokemonFavoriteViewEvent.HideModalDeletePokemon) },
+        deletePokemon = {
+            state.pokemonInformationToShow?.let {
+                onEvents(PokemonFavoriteViewEvent.DeletePokemonDB(it.id))
+            }
+            onEvents(PokemonFavoriteViewEvent.HideModalDeletePokemon)
+        }
     )
 
     CustomScaffold(

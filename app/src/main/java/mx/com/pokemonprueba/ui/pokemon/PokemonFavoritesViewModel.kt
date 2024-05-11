@@ -1,5 +1,7 @@
 package mx.com.pokemonprueba.ui.pokemon
 
+import android.content.Context
+import android.widget.Toast
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -12,7 +14,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class PokemonFavoritesViewModel @Inject constructor(
-    private val pokemonDao: PokemonDao
+    private val pokemonDao: PokemonDao,
+    private val context: Context
 ): BaseViewModel() {
 
     init {
@@ -72,5 +75,20 @@ class PokemonFavoritesViewModel @Inject constructor(
 
     private fun deletePokemonDB(pokemonId: String) {
         val state: PokemonFavoriteViewState = currentViewState()
+        val pokemonToDelete = state.pokemons.find { it.id == pokemonId }
+        viewModelScope.launch {
+            pokemonToDelete?.let {
+                pokemonDao.deletePokemon(it.toPokemonEntity())
+            }
+
+            val pokemonDBUpdate = pokemonDao.getAllPokemonSaved().map {
+                PokemonItem(
+                    id = it.id.toString(),
+                    name = it.name,
+                    image = it.image
+                )
+            }
+            updateViewState(state.copy(pokemons = pokemonDBUpdate, isVisibleModalDeletePokemon = false))
+        }
     }
 }
