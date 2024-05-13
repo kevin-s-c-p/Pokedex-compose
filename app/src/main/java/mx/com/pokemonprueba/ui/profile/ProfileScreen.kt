@@ -24,12 +24,13 @@ import mx.com.pokemonprueba.ui.composables.CustomScaffold
 import mx.com.pokemonprueba.ui.composables.CustomSwitch
 import mx.com.pokemonprueba.ui.profile.view.event.ProfileViewEvent
 import mx.com.pokemonprueba.ui.profile.view.state.ProfileViewState
+import mx.com.pokemonprueba.utils.DataNavigation
 
 @Composable
 fun ProfileScreen(
     state: ProfileViewState,
     onEvent: (ProfileViewEvent) -> Unit,
-    navigateTo: (route: String) -> Unit
+    navigateTo: (DataNavigation) -> Unit
 ) {
     val context = LocalContext.current
     LaunchedEffect(key1 = state.isDarkThemeActivated) {
@@ -41,7 +42,7 @@ fun ProfileScreen(
 
     CustomScaffold(
         title = R.string.title_profile,
-        navigateTo = { navigateTo(it) }
+        navigateTo = { navigateTo(DataNavigation.NavigateToCleanStash(it)) }
     ) {
         Column(
             modifier = Modifier

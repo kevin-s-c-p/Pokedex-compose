@@ -38,12 +38,13 @@ import mx.com.pokemonprueba.ui.composables.Loading
 import mx.com.pokemonprueba.ui.composables.PokemonCard
 import mx.com.pokemonprueba.ui.home.view.event.HomeViewEvent
 import mx.com.pokemonprueba.ui.home.view.state.HomeViewState
+import mx.com.pokemonprueba.utils.DataNavigation
 
 @Composable
 fun HomeScreen(
     state: HomeViewState,
     events: (HomeViewEvent) -> Unit,
-    navigateTo: (route: String) -> Unit
+    navigateTo: (DataNavigation) -> Unit
 ) {
 
     Loading(isLoading = state.isLoading)
@@ -60,7 +61,7 @@ fun HomeScreen(
 
     CustomScaffold(
         title = R.string.title_home,
-        navigateTo = { navigateTo(it) }
+        navigateTo = { navigateTo(DataNavigation.NavigateToCleanStash(it)) }
     ) {
         LazyColumn(modifier = Modifier
             .fillMaxSize()

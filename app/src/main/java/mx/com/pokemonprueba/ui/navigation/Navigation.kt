@@ -18,6 +18,7 @@ import mx.com.pokemonprueba.ui.pokemon.view.state.PokemonFavoriteViewState
 import mx.com.pokemonprueba.ui.profile.ProfileScreen
 import mx.com.pokemonprueba.ui.profile.ProfileViewModel
 import mx.com.pokemonprueba.ui.profile.view.state.ProfileViewState
+import mx.com.pokemonprueba.utils.DataNavigation
 
 @Composable
 fun Navigation(navController: NavController) {
@@ -32,16 +33,7 @@ fun Navigation(navController: NavController) {
             HomeScreen(
                 state = state,
                 events = viewModel::onEvent,
-                navigateTo = {
-                    navController.navigate(it) {
-                        popUpTo(Screens.HOME) {
-                            saveState = false
-                            inclusive = true
-                        }
-                        launchSingleTop = true
-                        restoreState = false
-                    }
-                }
+                navigateTo = { navigationController(navController, it) }
             )
         }
 
@@ -51,16 +43,7 @@ fun Navigation(navController: NavController) {
 
             PokemonFavorites(
                 state,
-                navigateTo = {
-                    navController.navigate(it) {
-                        popUpTo(Screens.POKEMON) {
-                            saveState = false
-                            inclusive = true
-                        }
-                        launchSingleTop = true
-                        restoreState = false
-                    }
-                },
+                navigateTo = { navigationController(navController, it) },
                 onEvents = viewModel::onEvent
             )
         }
@@ -72,17 +55,33 @@ fun Navigation(navController: NavController) {
             ProfileScreen(
                 state = state,
                 onEvent = viewModel::onEvent,
-                navigateTo = {
-                    navController.navigate(it) {
-                        popUpTo(Screens.PROFILE) {
-                            saveState = false
-                            inclusive = true
-                        }
-                        launchSingleTop = true
-                        restoreState = false
-                    }
-                }
+                navigateTo = { navigationController(navController, it) }
             )
         }
+    }
+}
+
+fun navigationController(navController: NavController, dataNavigation: DataNavigation) {
+    when(dataNavigation) {
+        is DataNavigation.NavigateTo -> {
+            navController.navigate(dataNavigation.route) {
+                launchSingleTop = true
+                restoreState = true
+            }
+        }
+        is DataNavigation.NavigateToCleanStash -> {
+            navController.navigate(dataNavigation.route) {
+                val destinyStart = dataNavigation.destinyStart.ifEmpty {
+                    navController.currentDestination?.route ?: ""
+                }
+                popUpTo(destinyStart) {
+                    saveState = false
+                    inclusive = true
+                }
+                launchSingleTop = true
+                restoreState = false
+            }
+        }
+        DataNavigation.NavigateUp -> navController.navigateUp()
     }
 }

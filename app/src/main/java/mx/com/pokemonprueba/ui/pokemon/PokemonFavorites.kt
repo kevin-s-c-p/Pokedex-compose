@@ -16,11 +16,12 @@ import mx.com.pokemonprueba.ui.composables.ModalDeletePokemon
 import mx.com.pokemonprueba.ui.composables.PokemonCard
 import mx.com.pokemonprueba.ui.pokemon.view.event.PokemonFavoriteViewEvent
 import mx.com.pokemonprueba.ui.pokemon.view.state.PokemonFavoriteViewState
+import mx.com.pokemonprueba.utils.DataNavigation
 
 @Composable
 fun PokemonFavorites(
     state: PokemonFavoriteViewState,
-    navigateTo: (route: String) -> Unit,
+    navigateTo: (DataNavigation) -> Unit,
     onEvents: (PokemonFavoriteViewEvent) -> Unit
 ) {
 
@@ -45,7 +46,7 @@ fun PokemonFavorites(
 
     CustomScaffold(
         title = R.string.title_pokemon_favorites,
-        navigateTo = { navigateTo(it) }
+        navigateTo = { navigateTo(DataNavigation.NavigateToCleanStash(it)) }
     ) {
         LazyColumn(modifier = Modifier
             .fillMaxSize()
