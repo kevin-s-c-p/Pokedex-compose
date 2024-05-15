@@ -103,7 +103,4 @@ dependencies {
     annotationProcessor("androidx.room:room-compiler:2.4.0")
 
     implementation("androidx.palette:palette:1.0.0")
-
-    implementation ("com.github.bumptech.glide:glide:4.14.2")
-    annotationProcessor ("com.github.bumptech.glide:compiler:4.14.2")
 }

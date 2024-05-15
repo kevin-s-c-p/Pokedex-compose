@@ -24,44 +24,5 @@ class ImageToBitmapUseCaseImp @Inject constructor(
             exception.printStackTrace()
             null
         }
-    }/*callbackFlow {
-        withContext(Dispatchers.IO) {
-            try {
-
-                trySend(null)
-            } catch (exception: Exception) {
-                exception.printStackTrace()
-                trySend(null)
-            }
-        }
-
-        awaitClose {  }
-        /*Glide.with(context)
-            .asBitmap()
-            .load(urlImage)
-            .listener(object : RequestListener<Bitmap> {
-                override fun onLoadFailed(
-                    e: GlideException?,
-                    model: Any?,
-                    target: Target<Bitmap>?,
-                    isFirstResource: Boolean
-                ): Boolean {
-                    trySend(null)
-                    return true
-                }
-
-                override fun onResourceReady(
-                    resource: Bitmap?,
-                    model: Any?,
-                    target: Target<Bitmap>?,
-                    dataSource: DataSource?,
-                    isFirstResource: Boolean
-                ): Boolean {
-                    trySend(resource)
-                    return true
-                }
-            }).submit()
-
-        awaitClose {  }*/
-    }*/
+    }
 }
