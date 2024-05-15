@@ -14,7 +14,8 @@ data class PokemonItem(
         return PokemonEntity(
             id = this.id.toInt(),
             name = this.name,
-            this.image
+            this.image,
+            colorRgb = this.colorRgbPokemon
         )
     }
 }

@@ -32,7 +32,8 @@ class PokemonFavoritesViewModel @Inject constructor(
                 PokemonItem(
                     id = it.id.toString(),
                     name = it.name,
-                    image = it.image
+                    image = it.image,
+                    colorRgbPokemon = it.colorRgb
                 )
             }
 

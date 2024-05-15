@@ -22,6 +22,7 @@ import androidx.compose.ui.window.Dialog
 private fun CustomDialog(
     modifier: Modifier = Modifier,
     isVisible: Boolean,
+    colorDialog: Color = MaterialTheme.colorScheme.primaryContainer,
     closeModal: () -> Unit,
     content: @Composable () -> Unit
 ) {
@@ -33,7 +34,7 @@ private fun CustomDialog(
                 modifier = modifier,
                 shape = RoundedCornerShape(10.dp),
                 elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
-                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer)
+                colors = CardDefaults.cardColors(containerColor = colorDialog)
             ) {
                 content()
             }
@@ -45,11 +46,15 @@ private fun CustomDialog(
 fun ModalDeletePokemon(
     isVisible: Boolean,
     imagePokemon: String,
+    colorDialog: Int?,
     cancel: () -> Unit,
     deletePokemon: () -> Unit
 ) {
+    val colorDialogToShow = if (colorDialog != null) Color(colorDialog) else MaterialTheme.colorScheme.primaryContainer
+
     CustomDialog(
         isVisible = isVisible,
+        colorDialog = colorDialogToShow,
         closeModal = { cancel() }
     ) {
         Column(

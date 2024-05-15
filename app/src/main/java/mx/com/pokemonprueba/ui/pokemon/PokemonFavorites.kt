@@ -35,6 +35,7 @@ fun PokemonFavorites(
     ModalDeletePokemon(
         isVisible = state.isVisibleModalDeletePokemon,
         imagePokemon = state.pokemonInformationToShow?.image ?: "",
+        colorDialog = state.pokemonInformationToShow?.colorRgbPokemon,
         cancel = { onEvents(PokemonFavoriteViewEvent.HideModalDeletePokemon) },
         deletePokemon = {
             state.pokemonInformationToShow?.let {

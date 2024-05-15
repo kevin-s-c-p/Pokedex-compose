@@ -5,7 +5,7 @@ import androidx.room.RoomDatabase
 import mx.com.pokemonprueba.data.entities.PokemonEntity
 import mx.com.pokemonprueba.domain.local.PokemonDao
 
-@Database(entities = [PokemonEntity::class], version = 1, exportSchema = false)
+@Database(entities = [PokemonEntity::class], version = 2, exportSchema = false)
 abstract class PokemonPruebaDataBase: RoomDatabase() {
     abstract fun pokemonDao(): PokemonDao
 }
