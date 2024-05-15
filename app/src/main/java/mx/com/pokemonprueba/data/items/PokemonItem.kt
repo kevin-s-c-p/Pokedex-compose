@@ -7,7 +7,8 @@ data class PokemonItem(
     val image: String,
     val imageBack: String = "",
     val name: String,
-    val abilities: List<PokemonAbility> = emptyList()
+    val abilities: List<PokemonAbility> = emptyList(),
+    val colorRgbPokemon: Int? = null
 ) {
     fun toPokemonEntity(): PokemonEntity {
         return PokemonEntity(

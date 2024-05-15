@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
@@ -20,6 +21,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -45,24 +47,31 @@ fun BottomModalInformationPokemon(
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(100.dp)
+                    .height(100.dp),
+                horizontalArrangement = Arrangement.spacedBy(10.dp)
             ) {
 
                 CustomImage(
                     modifier = Modifier
                         .weight(1f)
                         .fillMaxHeight()
-                        .background(MaterialTheme.colorScheme.background),
+                        .background(
+                            pokemonItem?.colorRgbPokemon?.let { Color(it) } ?: MaterialTheme.colorScheme.background,
+                                shape = RoundedCornerShape(10.dp)
+                        ),
                     image = pokemonItem?.image ?: "",
-                    contentScale = ContentScale.Fit
+                    contentScale = ContentScale.FillHeight
                 )
                 CustomImage(
                     modifier = Modifier
                         .weight(1f)
                         .fillMaxHeight()
-                        .background(MaterialTheme.colorScheme.background),
+                        .background(
+                            pokemonItem?.colorRgbPokemon?.let { Color(it) } ?: MaterialTheme.colorScheme.background,
+                            shape = RoundedCornerShape(10.dp)
+                        ),
                     image = pokemonItem?.imageBack ?: "",
-                    contentScale = ContentScale.Fit
+                    contentScale = ContentScale.FillHeight
                 )
             }
 
